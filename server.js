@@ -3,7 +3,10 @@
 var express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    dotenv = require('dotenv');
+
+dotenv.load();
 
 /**
  * Main application file
