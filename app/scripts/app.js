@@ -25,6 +25,10 @@ angular.module('vibeApp', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
+      .when('/song', {
+        templateUrl: 'partials/song',
+        controller: 'SongCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
