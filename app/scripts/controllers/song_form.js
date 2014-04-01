@@ -1,12 +1,16 @@
 'use strict';
 
 angular.module('vibeApp')
-  .controller('SongFormCtrl', function ($scope, $http) {
+  .controller('SongFormCtrl', function ($scope, $http, $location) {
 
     $scope.genre = {
         type: "",
         user_moods: []
     };
+
+    $scope.counter = 0;
+
+    $scope.show_button = false;
 
     $scope.moods = [
       { option: "Happy", valid: false },
@@ -19,35 +23,36 @@ angular.module('vibeApp')
       for (var i = 0; i < $scope.moods.length; i++) {
         if ($scope.moods[i].valid) {
           $scope.genre.user_moods.push($scope.moods[i].option)
-          // $scope.moods[i].valid = false;
+          $scope.moods[i].valid = false;
         }
       }
+      $scope.counter++
+      $scope.finish();
+    };
+
+    $scope.switchView = function () {
+      $location.path('/');
+    }
+
+    $scope.request = function () {
+      // $http({method:"get", url: "http://www.google.com"})
+      //   .success(function(data){console.log(data);})
+      $http({ method: 'POST', url: '/sample'}).
+        success(function(data,status, headers, config){
+          console.log(data);
+        }).
+        error(function(data,status,headers,config){
+          console.log("This is not good");
+        });
     };
 
 
-<<<<<<< HEAD
-    $scope.something = function () {
-      $http({
-        method: "POST",
-        url: "/songs",
-        data: { text: "Hello" }
-      }).success(function(response) {
-        console.log(response);
-=======
-    $scope.request = function () {
-      $http.post('/songs', { text: "hello" } ).success(function(res) {
-        console.log(res);
->>>>>>> 62ae010fd79d46a71b1366a60c4605501b91d3a9
-      });
+
+    $scope.finish = function () {
+      if ($scope.counter > 2) {
+        $scope.show_button = true;
+      }
     }
 
-    // $scope.request = function () {
-    //   $http.get('/songs').success(function(data) {
-    //     $scope.message = data;
-    //   }).
-    //   error(function(response) {
-    //     console.log("WhoopS");
-    //   })
-    // };
 
   });
