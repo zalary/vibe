@@ -30,6 +30,19 @@ angular.module('vibeApp')
       $scope.finish();
     };
 
+<<<<<<< HEAD
+    $scope.something = function () {
+      $http({
+        method: "POST",
+        url: "/songs",
+        data: { text: "Hello" }
+      }).success(function(response) {
+        console.log(response);
+    $scope.request = function () {
+      $http.post('/songs', { text: "hello" } ).success(function(res) {
+        console.log(res);
+      });
+=======
     $scope.switchView = function () {
       $location.path('/');
     }
@@ -52,6 +65,7 @@ angular.module('vibeApp')
       if ($scope.counter > 2) {
         $scope.show_button = true;
       }
+>>>>>>> 434f54d0b0faf2640a336538d7e86244cdee74e6
     }
 
 
