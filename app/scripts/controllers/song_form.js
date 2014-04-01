@@ -25,11 +25,23 @@ angular.module('vibeApp')
     };
 
 
-    $scope.request = function () {
-      $http.post('/songs', { text: "hello" } ).success(function(response) {
+    $scope.something = function () {
+      $http({
+        method: "POST",
+        url: "/songs",
+        data: { text: "Hello" }
+      }).success(function(response) {
         console.log(response);
       });
-    };
+    }
 
+    // $scope.request = function () {
+    //   $http.get('/songs').success(function(data) {
+    //     $scope.message = data;
+    //   }).
+    //   error(function(response) {
+    //     console.log("WhoopS");
+    //   })
+    // };
 
   });
