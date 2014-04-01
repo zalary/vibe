@@ -11,7 +11,7 @@ angular.module('vibeApp')
 
 
 		var iframeElement   = document.getElementById('sc-widget');
-		var widget        = SC.Widget(iframeElement);
+		$scope.widget        = SC.Widget(iframeElement);
 
 		// SC.connect(function() {
 		//   SC.get('/me', function(me) { 
@@ -21,12 +21,12 @@ angular.module('vibeApp')
 
 		var genre = "seapunk"; // get from user input
 
-		var queue = [];	
-		var atrack = queue[Math.floor(Math.random() * queue.length)];
+		var queue = [{artist: 'BIGKRIT', title: 'Country Rap Tune', url: 'http://soundcloud.com/bigkrit/08-country-rap-tune'}];
+    	var atrack = queue[Math.floor(Math.random() * queue.length)];
 
-		//make this event based
+		//make this event based fdsafdsa 
 		
-		var addTracks = function(){
+		$scope.addTracks = function(){
 			SC.get('/tracks', { q: genre }, function(tracks) {
 				// var currentPlaylist; //figure this out somehow -- current user playlist current: true 
 			    for(var i = 0; i < 10; i++){
@@ -45,39 +45,55 @@ angular.module('vibeApp')
 			});
 		};
 
-		var loadPlayer = function(){
+		$scope.currentSong;
+
+		$scope.loadPlayer = function(){
 			atrack = queue[Math.floor(Math.random() * queue.length)];
-			widget.load(atrack.url, {auto_play: true});
+			$scope.widget.load(atrack.url, {auto_play: true});
 			var currentSongIndex = queue.indexOf(atrack);
 			queue[currentSongIndex].playcount++;
 		};
 
-		var pausePlayer = function(){
-			widget.pause();
+		$scope.pausePlayer = function(){
+			$scope.widget.pause();
 		};
 
-		var playPlayer = function(){
-			widget.play();
+		$scope.playPlayer = function(){
+			$scope.widget.play();
 		};
 
-		var togglePlayer = function(){
-			//toggles play/pause
-			widget.toggle();
+		$scope.togglePlayer = function(){
+			$scope.widget.toggle();
 		};
 
-		var skip = function(){
-			var skipSong = widget.getcurrentsound().permalink_url;
-			var skipDex = queue.indexOf({url: skipsong});
-			queue[skipdex].skip = true;
-			widget.next();
+		$scope.skip = function(){
+			
+			$scope.widget.getCurrentSound(function(data){
+				var endTime;
+				endTime = data.duration;
+				
+				var skipSong = data.permalink_url;
+				for(var i = 0; i < queue.length; i++){
+					if(queue[i].url === skipSong){
+						// console.log(queue[i]);
+						queue[i].skip = true;
+					}
+				}
+				// console.log($scope.widget);
+				$scope.widget.seekTo(endTime);
+			});
+
 		}
 
-		widget.bind(SC.Widget.Events.FINISH, function(){
+		$scope.widget.bind(SC.Widget.Events.FINISH, function(){
 			var randex = Math.floor(Math.random() * queue.length);
 			atrack = queue[randex];
-			widget.load(atrack.url, {auto_play: true});
+			$scope.widget.load(atrack.url, {auto_play: true});
 			queue[randex].playcount++;
+			console.log(queue[randex]);
 		});
 
+		$scope.loadPlayer();
+		$scope.addTracks();
 
 });
