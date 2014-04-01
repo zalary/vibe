@@ -24,8 +24,6 @@ angular.module('vibeApp')
       }
     };
 
-
-<<<<<<< HEAD
     $scope.something = function () {
       $http({
         method: "POST",
@@ -33,11 +31,9 @@ angular.module('vibeApp')
         data: { text: "Hello" }
       }).success(function(response) {
         console.log(response);
-=======
     $scope.request = function () {
       $http.post('/songs', { text: "hello" } ).success(function(res) {
         console.log(res);
->>>>>>> 62ae010fd79d46a71b1366a60c4605501b91d3a9
       });
     }
 
