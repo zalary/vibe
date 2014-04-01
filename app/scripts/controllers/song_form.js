@@ -10,7 +10,7 @@ angular.module('vibeApp')
 
     $scope.counter = 0;
 
-    $scope.show_button = true;
+    $scope.show_button = false;
 
     $scope.moods = [
       { option: "Happy", valid: false },
@@ -35,14 +35,22 @@ angular.module('vibeApp')
     }
 
     $scope.request = function () {
-      $http.post('/songs', { text: "hello" } ).success(function(res) {
-        console.log(res);
-      });
+      // $http({method:"get", url: "http://www.google.com"})
+      //   .success(function(data){console.log(data);})
+      $http({ method: 'POST', url: '/sample'}).
+        success(function(data,status, headers, config){
+          console.log(data);
+        }).
+        error(function(data,status,headers,config){
+          console.log("This is not good");
+        });
     };
+
+
 
     $scope.finish = function () {
       if ($scope.counter > 2) {
-        $scope.show_button = false;
+        $scope.show_button = true;
       }
     }
 
