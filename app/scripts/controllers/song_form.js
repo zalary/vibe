@@ -26,8 +26,8 @@ angular.module('vibeApp')
 
 
     $scope.request = function () {
-      $http.post('/songs', { text: "hello" } ).success(function(response) {
-        console.log(response);
+      $http.post('/songs', { text: "hello" } ).success(function(res) {
+        console.log(res);
       });
     };
 
