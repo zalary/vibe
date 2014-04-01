@@ -15,7 +15,7 @@ angular.module('vibeApp')
 		//   });
 		// });
 
-		var genre = "rap";
+		var genre = "seapunk";
 		var addQueue = [];	
 
 		//make this event based
