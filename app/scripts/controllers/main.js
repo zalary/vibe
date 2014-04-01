@@ -15,7 +15,7 @@ angular.module('vibeApp')
 		//   });
 		// });
 
-		var genre = "seapunk";
+		var genre = "seapunk"; // SWITCH IN INPUT QUERY
 		var addQueue = [];	
 
 		//make this event based
