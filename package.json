@@ -9,7 +9,8 @@
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
     "ejs": "~0.8.4",
-    "dotenv": "latest"
+    "dotenv": "latest",
+    "passport-twitter": "latest"
   },
   "devDependencies": {
     "grunt": "^0.4.4",
