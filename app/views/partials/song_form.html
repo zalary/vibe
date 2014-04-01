@@ -1,4 +1,5 @@
 <div>
+    Question {{counter}} of 3
 
     <h3>Genre</h3>
     <input ng-model="genre.type" placeholder="Write genre here">
@@ -9,8 +10,9 @@
     </div>
 
 
-    <button ng-click="setMood()">Send</button>
-    <button ng-click="request()">Request</button>
+    <button ng-click="setMood()">Add</button>
+    <button ng-hide="show_button" ng-click="request()">Move on</button>
+    <button ng-click="switchView()"></button>
 
     <br>
 
