@@ -6,7 +6,7 @@ angular.module('vibeApp')
 
 		SC.initialize({
 			client_id: '5b99452b5af12d3c60b5c44999140f09',
-		  // redirect_uri: '/'
+			redirect_uri: '/'
 		});
 
 		// SC.connect(function() {
@@ -15,15 +15,15 @@ angular.module('vibeApp')
 		//   });
 		// });
 
-		var genre = "seapunk"
-		var addQueue = [];
+		var genre = "rap";
+		var addQueue = [];	
 
+		//make this event based
 		SC.get('/tracks', { q: genre }, function(tracks) {
 			var currentPlaylist; //figure this out somehow -- current user playlist current: true 
 		    for(var i = 0; i < 10; i++){
 		  	// the new song to the database, parsed to the object we want: 
 				var newTrack = {title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url};
-				// console.log(newTrack);
 
 				$http({
 					method: "POST",
@@ -31,12 +31,12 @@ angular.module('vibeApp')
 					data: newTrack
 
 				}).success(function(res){
-					console.log(res.url);
 		  			addQueue.push({url: res.url, playcount: 0, skip: false});
+		  			console.log(addQueue);
 				});
 		}
-		  	// another db request:
-		// currentPlaylist += addQueue;
+		  	// to do: add addQueue to user's playlist
+		// user.currentPlaylist += addQueue;
 		
 
     });
