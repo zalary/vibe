@@ -2,16 +2,23 @@
 
 angular.module('vibeApp')
 	.controller('MainCtrl', function ($scope, $http) {
-		$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 		SC.initialize({
 			client_id: '5b99452b5af12d3c60b5c44999140f09',
 			redirect_uri: '/'
 		});
 
+		$scope.getMe = function(){
+			$http({method: 'GET', url: '/api/users/me'}).
+			    success(function(data, status, headers, config) {
+			      // this callback will be called asynchronously
+			      // when the response is available
+			      console.log(data);
+			});
+		}
 
-		var iframeElement   = document.getElementById('sc-widget');
-		$scope.widget        = SC.Widget(iframeElement);
+		var iframeElement = document.getElementById('sc-widget');
+		$scope.widget = SC.Widget(iframeElement);
 
 		// SC.connect(function() {
 		//   SC.get('/me', function(me) { 
@@ -67,7 +74,7 @@ angular.module('vibeApp')
 		};
 
 		$scope.skip = function(){
-			
+
 			$scope.widget.getCurrentSound(function(data){
 				var endTime;
 				endTime = data.duration;
@@ -90,7 +97,7 @@ angular.module('vibeApp')
 			atrack = queue[randex];
 			$scope.widget.load(atrack.url, {auto_play: true});
 			queue[randex].playcount++;
-			console.log(queue[randex]);
+			console.log(queue.length);
 		});
 
 		$scope.loadPlayer();
