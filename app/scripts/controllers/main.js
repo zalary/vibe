@@ -14,8 +14,8 @@ angular.module('vibeApp')
 		$scope.widget        = SC.Widget(iframeElement);
 
 		// SC.connect(function() {
-		//   SC.get('/me', function(me) { 
-		//    // any sign in stuff we need 
+		//   SC.get('/me', function(me) {
+		//    // any sign in stuff we need
 		//   });
 		// });
 
@@ -24,13 +24,13 @@ angular.module('vibeApp')
 		var queue = [{artist: 'BIGKRIT', title: 'Country Rap Tune', url: 'http://soundcloud.com/bigkrit/08-country-rap-tune'}];
     	var atrack = queue[Math.floor(Math.random() * queue.length)];
 
-		//make this event based fdsafdsa 
-		
+		//make this event based fdsafdsa
+
 		$scope.addTracks = function(){
 			SC.get('/tracks', { q: genre }, function(tracks) {
-				// var currentPlaylist; //figure this out somehow -- current user playlist current: true 
+				// var currentPlaylist; //figure this out somehow -- current user playlist current: true
 			    for(var i = 0; i < 10; i++){
-			  	// the new song to the database, parsed to the object we want: 
+			  	// the new song to the database, parsed to the object we want:
 					var newTrack = {title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url};
 					// console.log(newTrack);
 					$http({
@@ -39,7 +39,7 @@ angular.module('vibeApp')
 						data: newTrack
 
 					}).success(function(res){
-			  			queue.push({url: res.url, playcount: 0, skip: false});			  			
+			  			queue.push({url: res.url, playcount: 0, skip: false});
 					});
 			}
 			});
@@ -67,11 +67,11 @@ angular.module('vibeApp')
 		};
 
 		$scope.skip = function(){
-			
+
 			$scope.widget.getCurrentSound(function(data){
 				var endTime;
 				endTime = data.duration;
-				
+
 				var skipSong = data.permalink_url;
 				for(var i = 0; i < queue.length; i++){
 					if(queue[i].url === skipSong){
