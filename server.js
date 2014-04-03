@@ -6,12 +6,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     dotenv = require('dotenv');
 
-
 dotenv.load();
-
-/**
- * Main application file
- */
 
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';

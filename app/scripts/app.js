@@ -36,7 +36,8 @@ angular.module('vibeApp', [
       })
       .when('/', {
         templateUrl: 'partials/mood.html',
-        controller: 'MoodCtrl'
+        controller: 'MoodCtrl',
+        authenticate: true
       })
       .otherwise({
         redirectTo: '/'

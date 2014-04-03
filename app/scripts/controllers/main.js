@@ -25,19 +25,17 @@ angular.module('vibeApp')
 
 		var atrack = queue[Math.floor(Math.random() * queue.length)];
 
-
 		$scope.addTracks = function(){
 			console.log('addTracks button works');
 
-				SC.get('/tracks', { q: userData.chill.genres[0] }, function(tracks) {
-				    for(var i = 0; i < (10/userData.chill.genres.length); i++){
-						queue.push({title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url, skip: false, liked: false});
-						console.log(queue);
-					}
-				});
+			SC.get('/tracks', { q: userData.chill.genres[0] }, function(tracks) {
+			    for(var i = 0; i < (10/userData.chill.genres.length); i++){
+					queue.push({title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url, skip: false, liked: false});
+					console.log(queue);	
+				}
+			});
 			
 		};
-
 
 		$scope.loadPlayer = function(){
 			atrack = queue[Math.floor(Math.random() * queue.length)];
@@ -57,7 +55,6 @@ angular.module('vibeApp')
 		$scope.togglePlayer = function(){
 			$scope.widget.toggle();
 		};
-
 
 		$scope.skip = function(){
 
@@ -79,6 +76,16 @@ angular.module('vibeApp')
 
 		};
 
+		$scope.savePlaylist = function(){
+			userData.chill.songs = queue;
+			console.log("Songs in Queue: " + userData.chill.songs.length);
+			console.log(userData);
+			$http.post('/api/users/me', userData).
+			    success(function(data, status, headers, config) {
+			      console.log("post request got there");
+			  });
+		};
+
 		$scope.widget.bind(SC.Widget.Events.FINISH, function(){
 			var randex = Math.floor(Math.random() * queue.length);
 			atrack = queue[randex];
@@ -86,6 +93,5 @@ angular.module('vibeApp')
 			queue[randex].playcount++;
 			console.log(queue.length);
 		});
-
 
 });
