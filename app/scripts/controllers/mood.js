@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('vibeApp')
-  .controller('MoodCtrl', function ($scope, $location) {
+  .controller('MoodCtrl', function ($scope, $location, $http) {
 
     var user = {
       mood: $scope.userMood,
@@ -31,6 +31,10 @@ angular.module('vibeApp')
 
     $scope.setPlayer = function () {
       $location.path('/main');
+      $http.post('/api/users/me', user)
+        .success(function(data){
+          console.log("Posted new user info");
+        });
     }
 
   });
