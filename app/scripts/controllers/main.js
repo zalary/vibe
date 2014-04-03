@@ -11,6 +11,7 @@ angular.module('vibeApp')
 		var queue = [{artist: 'diors', title: 'automatic', url: 'https://soundcloud.com/diors/automatic'}];
 		var userData;
 		var iframeElement = document.getElementById('sc-widget');
+		$scope.currentSong;
 		$scope.widget = SC.Widget(iframeElement);
 
 		$scope.getMe = function(){
@@ -19,7 +20,6 @@ angular.module('vibeApp')
 			      userData = data;
 			      queue = data.chill.songs;
 			      console.log(userData.chill);
-
 			});
 		};
 
@@ -38,7 +38,6 @@ angular.module('vibeApp')
 			
 		};
 
-		$scope.currentSong;
 
 		$scope.loadPlayer = function(){
 			atrack = queue[Math.floor(Math.random() * queue.length)];
