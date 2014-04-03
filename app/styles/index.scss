@@ -1,0 +1,26 @@
+body {
+  background-color: rgb(14, 105, 125);
+}
+
+.mood-form {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 48rem;
+  width: 90%;
+  text-align: center;
+  border: 1px solid black;
+  height: 50%;
+  padding-top: 5rem;
+}
+
+.mood-list {
+  li {
+    float: left;
+    margin-left: 10px;
+  }
+  button {
+    height: 3rem ;
+    width: 5rem ;
+    border-radius: 1rem;
+  }
+}

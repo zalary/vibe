@@ -8,7 +8,7 @@ angular.module('vibeApp', [
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
-      .when('/', {
+      .when('/main', {
         templateUrl: 'partials/main',
         controller: 'MainCtrl',
         authenticate: true
@@ -33,6 +33,10 @@ angular.module('vibeApp', [
       .when('/song_form', {
         templateUrl: 'partials/song_form.html',
         controller: 'SongFormCtrl'
+      })
+      .when('/', {
+        templateUrl: 'partials/mood.html',
+        controller: 'MoodCtrl'
       })
       .otherwise({
         redirectTo: '/'
