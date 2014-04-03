@@ -1,55 +1,41 @@
 'use strict';
 
 angular.module('vibeApp')
-	.controller('MainCtrl', function ($scope, $http) {
+	.controller('MainCtrl', function ($scope, User, $http) {
 
 		SC.initialize({
 			client_id: '5b99452b5af12d3c60b5c44999140f09',
 			redirect_uri: '/'
 		});
 
-		$scope.getMe = function(){
-			$http({method: 'GET', url: '/api/users/me'}).
-			    success(function(data, status, headers, config) {
-			      // this callback will be called asynchronously
-			      // when the response is available
-			      console.log(data);
-			});
-		}
-
+		var queue = [{artist: 'diors', title: 'automatic', url: 'https://soundcloud.com/diors/automatic'}];
+		var userData;
 		var iframeElement = document.getElementById('sc-widget');
 		$scope.widget = SC.Widget(iframeElement);
 
-		// SC.connect(function() {
-		//   SC.get('/me', function(me) {
-		//    // any sign in stuff we need
-		//   });
-		// });
+		$scope.getMe = function(){
+			$http({method: 'GET', url: '/api/users/me'}).
+			    success(function(data, status, headers, config) {
+			      userData = data;
+			      queue = data.chill.songs;
+			      console.log(userData.chill);
 
-		var genre = "seapunk"; // get from user input
+			});
+		};
 
-		var queue = [{artist: 'BIGKRIT', title: 'Country Rap Tune', url: 'http://soundcloud.com/bigkrit/08-country-rap-tune'}];
-    	var atrack = queue[Math.floor(Math.random() * queue.length)];
+		var atrack = queue[Math.floor(Math.random() * queue.length)];
 
-		//make this event based fdsafdsa
 
 		$scope.addTracks = function(){
-			SC.get('/tracks', { q: genre }, function(tracks) {
-				// var currentPlaylist; //figure this out somehow -- current user playlist current: true
-			    for(var i = 0; i < 10; i++){
-			  	// the new song to the database, parsed to the object we want:
-					var newTrack = {title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url};
-					// console.log(newTrack);
-					$http({
-						method: "POST",
-						url: "/api/songs",
-						data: newTrack
+			console.log('addTracks button works');
 
-					}).success(function(res){
-			  			queue.push({url: res.url, playcount: 0, skip: false});
-					});
-			}
-			});
+				SC.get('/tracks', { q: userData.chill.genres[0] }, function(tracks) {
+				    for(var i = 0; i < (10/userData.chill.genres.length); i++){
+						queue.push({title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url, skip: false, liked: false});
+						console.log(queue);
+					}
+				});
+			
 		};
 
 		$scope.currentSong;
@@ -73,6 +59,7 @@ angular.module('vibeApp')
 			$scope.widget.toggle();
 		};
 
+
 		$scope.skip = function(){
 
 			$scope.widget.getCurrentSound(function(data){
@@ -88,9 +75,10 @@ angular.module('vibeApp')
 				}
 				// console.log($scope.widget);
 				$scope.widget.seekTo(endTime);
+				$scope.widget.play();
 			});
 
-		}
+		};
 
 		$scope.widget.bind(SC.Widget.Events.FINISH, function(){
 			var randex = Math.floor(Math.random() * queue.length);
@@ -100,7 +88,5 @@ angular.module('vibeApp')
 			console.log(queue.length);
 		});
 
-		$scope.loadPlayer();
-		$scope.addTracks();
 
 });
