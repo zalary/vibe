@@ -1,0 +1,11 @@
+<div ng-include="'partials/navbar'"></div>
+
+<div class="row mood-form">
+  <h3>What mood are you in?</h3>
+  <div class="small-7 small-centered columns">
+    <ul class="mood-list">
+      <li ng-repeat="mood in moods"> <button> {{mood.icon}} </button></li>
+    </ul>
+  </div>
+</div>
+
