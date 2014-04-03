@@ -2,7 +2,6 @@
 
 angular.module('vibeApp')
 	.controller('MainCtrl', function ($scope, $http) {
-		$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 		SC.initialize({
 			client_id: '5b99452b5af12d3c60b5c44999140f09',
