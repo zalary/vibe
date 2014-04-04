@@ -39,13 +39,6 @@ angular.module('vibeApp')
 
     $scope.setPlayer = function (mood) {
       $location.path('/main/' + mood);
-      // $http.put('/api/users/new/genre', { genre: genre } )
-      //   .success(function(data){
-      //     console.log(data);
-      //   })
-      //   .error(function(data){
-      //     window.alert("Sorry, could not process your request at this moment. Please try again momentarily");
-      //   });
     };
 
   });
