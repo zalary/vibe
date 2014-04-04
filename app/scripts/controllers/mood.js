@@ -1,23 +1,25 @@
 'use strict';
 
-angular.module('vibeApp')
-  .controller('MoodCtrl', function ($scope, $location, $http) {
+// var users  = require('./controllers/users');
 
-    var user = {
-      mood: $scope.userMood,
-      genre: $scope.userGenre
-    };
+angular.module('vibeApp')
+  .controller('MoodCtrl', function ($scope, $location, $http, User, Auth) {
 
     $scope.select = "form";
 
     $scope.userMood = "";
     $scope.userGenre = "";
 
+    $scope.findAuth = function () {
+      var x = Auth.currentUser();
+      console.log(x);
+    }
+
     $scope.moods = [
-      { type: "Happy", icon: ":)" },
-      { type: "Chill", icon: "B|" },
-      { type: "Party", icon: "<:D" },
-      { type: "Sad", icon: ":(" }
+      { type: "happy", icon: ":)" },
+      { type: "chill", icon: "B|" },
+      { type: "party", icon: "<:D" },
+      { type: "sad", icon: ":(" }
     ];
 
     $scope.setMood = function (mood) {
@@ -29,11 +31,13 @@ angular.module('vibeApp')
       $scope.select = "form";
     }
 
-    $scope.setPlayer = function () {
-      $location.path('/main');
-      $http.post('/api/users/me', user)
+    $scope.setPlayer = function (mood, genre) {
+      $http.put('/api/users/me', { mood: mood, genre: genre} )
         .success(function(data){
-          console.log("Posted new user info");
+          $location.path('/main');
+        })
+        .error(function(data){
+          window.alert("Sorry, could not process your request at this moment. Please try again momentarily");
         });
     }
 
