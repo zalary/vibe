@@ -22,6 +22,8 @@ angular.module('vibeApp')
 			      userData = data;
 			      queue = data[mood].songs;
 			      genres = data[mood].genres;
+				  console.log(mood);
+				  console.log(genres);
 			});
 		};
 
@@ -29,7 +31,6 @@ angular.module('vibeApp')
 			SC.get('/tracks', { q: genres[0] }, function(tracks) {
 			    for(var i = 0; i < (10/genres.length); i++){
 					queue.push({title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url, skip: false, liked: false});
-					console.log(queue);
 				}
 			});
 		};
@@ -82,7 +83,6 @@ angular.module('vibeApp')
 			var atrack = queue[randex];
 			$scope.widget.load(atrack.url, {auto_play: true});
 			queue[randex].playcount++;
-			console.log(queue.length);
 		});
 
   });
