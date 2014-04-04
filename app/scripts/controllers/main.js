@@ -9,10 +9,10 @@ angular.module('vibeApp')
 
 		var queue = [{artist: 'diors', title: 'automatic', url: 'https://soundcloud.com/diors/automatic'}];
 		var userData;
-		var moodGenres;
-		var genres;
+		var genre;
 		var mood = $routeParams.mood;
 		var iframeElement = document.getElementById('sc-widget');
+		var currentSongIndex;
 
 		$scope.widget = SC.Widget(iframeElement);
 
@@ -21,25 +21,22 @@ angular.module('vibeApp')
 			    success(function(data) {
 			      userData = data;
 			      queue = data[mood].songs;
-			      genres = data[mood].genres;
-				  console.log(mood);
-				  console.log(genres);
+			      genre = data[mood].genre;
 			});
 		};
 
 		$scope.addTracks = function(){
-			SC.get('/tracks', { q: genres[0] }, function(tracks) {
-			    for(var i = 0; i < (10/genres.length); i++){
+			SC.get('/tracks', { q: genre, tags: mood }, function(tracks) {
+			    for(var i = 0; i < 10; i++){
 					queue.push({title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url, skip: false, liked: false, playcount: 0});
 				}
 			});
 		};
 
 		$scope.loadPlayer = function(){
-			var atrack = queue[Math.floor(Math.random() * queue.length)];
+			currentSongIndex = [Math.floor(Math.random() * queue.length)];
+			var atrack = queue[currentSongIndex];
 			$scope.widget.load( atrack.url, {auto_play: true} );
-			var currentSongIndex = queue.indexOf(atrack);
-			queue[currentSongIndex].playcount++;
 		};
 
 		$scope.cleanUp = function(){
@@ -47,7 +44,7 @@ angular.module('vibeApp')
 			var i = 0;
 			if( queue.length > 50){
 				while( i < queue.length ){
-					if( queue[i].liked === false && queue[i].playcount === 0 ){
+					if( queue[i].liked === false && queue[i].playcount > 1 ){
 						queue.splice(i, 1);
 					}
 					i++;
@@ -57,7 +54,7 @@ angular.module('vibeApp')
 		},
 
 		$scope.like = function(){
-
+			queue[currentSongIndex].liked = true;
 		};
 
 		$scope.pausePlayer = function(){
@@ -73,17 +70,8 @@ angular.module('vibeApp')
 		};
 
 		$scope.skip = function(){
-			$scope.widget.getCurrentSound(function(data){
-				var endTime;
-				endTime = data.duration;
-				var skipSong = data.permalink_url;
-				for( var i = 0; i < queue.length; i++ ){
-					if(queue[i].url === skipSong){
-						queue[i].skip = true;
-					}
-				}
-				$scope.widget.seekTo(endTime);
-			});
+			queue[currentSongIndex].skip = true;
+			$scope.loadPlayer();
 		};
 
 		$scope.savePlaylist = function(){
@@ -92,10 +80,10 @@ angular.module('vibeApp')
 		};
 
 		$scope.widget.bind(SC.Widget.Events.FINISH, function(){
-			var randex = Math.floor(Math.random() * queue.length);
-			var atrack = queue[randex];
+			currentSongIndex = Math.floor(Math.random() * queue.length);
+			var atrack = queue[currentSongIndex];
 			$scope.widget.load(atrack.url, {auto_play: true});
-			queue[randex].playcount++;
+			queue[currentSongIndex].playcount++;
 		});
 
   });
