@@ -11,7 +11,7 @@
   </div>
   <div ng-switch-when="genre">
     <h3>What genre do you like to listen to when feeling {{userMood}}?</h3>
-    <form ng-submit="setPlayer(userGenre)">
+    <form ng-submit="setPlayer(userMood)">
       <input ng-model="userGenre" autofocus>
       <button ng-show="userGenre">Feelin' {{userMood}}</button>
     </form>

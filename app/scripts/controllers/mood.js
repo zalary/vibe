@@ -18,6 +18,7 @@ angular.module('vibeApp')
     ];
 
     $scope.setMood = function (mood) {
+      $scope.userMood = mood;
       $http.get('/moods/' + mood)
         .success(function (data) {
           if (!data) {
@@ -36,9 +37,8 @@ angular.module('vibeApp')
       $scope.select = "form";
     };
 
-    $scope.setPlayer = function (genre) {
-        console.log("TIME TO PARTY!", genre);
-      // $location.path('/main');
+    $scope.setPlayer = function (mood) {
+      $location.path('/main/' + mood);
       // $http.put('/api/users/new/genre', { genre: genre } )
       //   .success(function(data){
       //     console.log(data);
