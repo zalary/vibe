@@ -9,33 +9,25 @@ angular.module('vibeApp')
 
 		var queue = [{artist: 'diors', title: 'automatic', url: 'https://soundcloud.com/diors/automatic'}];
 		var userData;
+		var moodGenres;
+		var genres;
+		var mood = $routeParams.mood;
 		var iframeElement = document.getElementById('sc-widget');
-		var currentPlaylist;
 
 		$scope.widget = SC.Widget(iframeElement);
-
-		if ( $routeParams.mood === 'party' ){
-			currentPlaylist = 'party';
-		} else if ( $routeParams.mood === 'happy' ) {
-			currentPlaylist = 'happy';
-		} else if ( $routeParams.mood === 'sad' ) {
-			currentPlaylist = 'sad';
-		} else {
-			currentPlaylist = 'chill';
-		}
 
 		$scope.getMe = function(){
 			$http({method: 'GET', url: '/api/users/me'}).
 			    success(function(data) {
 			      userData = data;
-			      queue = data.currentPlaylist.songs;
-			      console.log(userData.currentPlaylist);
+			      queue = data[mood].songs;
+			      genres = data[mood].genres;
 			});
 		};
 
 		$scope.addTracks = function(){
-			SC.get('/tracks', { q: userData.currentPlaylist.genres[0] }, function(tracks) {
-			    for(var i = 0; i < (10/userData.currentPlaylist.genres.length); i++){
+			SC.get('/tracks', { q: genres[0] }, function(tracks) {
+			    for(var i = 0; i < (10/genres.length); i++){
 					queue.push({title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url, skip: false, liked: false});
 					console.log(queue);
 				}
@@ -81,9 +73,7 @@ angular.module('vibeApp')
 		};
 
 		$scope.savePlaylist = function(){
-			userData.currentPlaylist.songs = queue;
-			console.log('Songs in Queue: ' + userData.currentPlaylist.songs.length);
-			console.log(userData);
+			userData[mood].songs = queue;
 			$http.post( '/api/users/me', userData );
 		};
 
