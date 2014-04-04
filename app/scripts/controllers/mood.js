@@ -37,8 +37,14 @@ angular.module('vibeApp')
       $scope.select = "form";
     };
 
-    $scope.setPlayer = function (mood) {
-      $location.path('/main/' + mood);
+    $scope.setPlayer = function (mood, genre) {
+      $http.post('/moods/genre', { genre: genre, mood: mood })
+        .success(function (data) {
+          $location.path('/main/' + mood);
+        })
+        .error(function (data) {
+          window.alert("Sorry, your vibe can't be processed at this time");
+        })
     };
 
   });
