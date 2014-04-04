@@ -23,22 +23,30 @@ angular.module('vibeApp')
     ];
 
     $scope.setMood = function (mood) {
-      $scope.userMood = mood;
-      $scope.select = "genre";
+      // $scope.userMood = mood;
+      $http.get('/moods/' + mood)
+        .success(function(data){
+          console.log(data);
+          $scope.select = "genre";
+        })
+        .error(function(data) {
+          alert("Sorry, your vibe can't be processed at this time");
+        })
     }
 
     $scope.chooseMood = function () {
       $scope.select = "form";
     }
 
-    $scope.setPlayer = function (mood, genre) {
-      $http.put('/api/users/me', { mood: mood, genre: genre} )
-        .success(function(data){
-          $location.path('/main');
-        })
-        .error(function(data){
-          window.alert("Sorry, could not process your request at this moment. Please try again momentarily");
-        });
+    $scope.setPlayer = function (genre) {
+      $location.path('/main');
+      // $http.put('/api/users/new/genre', { genre: genre } )
+      //   .success(function(data){
+      //     console.log(data);
+      //   })
+      //   .error(function(data){
+      //     window.alert("Sorry, could not process your request at this moment. Please try again momentarily");
+      //   });
     }
 
   });

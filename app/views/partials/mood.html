@@ -7,14 +7,13 @@
       <ul class="mood-list">
         <li ng-repeat="mood in moods"><button ng-click="setMood(mood.type)">{{mood.icon}}</button></li>
       </ul>
-      <button ng-click="findAuth()"></button>
     </div>
   </div>
   <div ng-switch-when="genre">
     <h3>What genre do you like to listen to when feeling {{userMood}}?</h3>
-    <form class="form" name="form" ng-submit="setPlayer(userMood, userGenre)">
+    <form ng-submit="setPlayer(userGenre)">
       <input ng-model="userGenre" autofocus>
-        <button ng-show="userGenre" >Feelin' {{userMood}}</button>
+      <button ng-show="userGenre" >Feelin' {{userMood}}</button>
     </form>
     <button ng-click="chooseMood()">Back</button>
   </div>
