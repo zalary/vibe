@@ -8,7 +8,7 @@ angular.module('vibeApp', [
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
-      .when('/main', {
+      .when('/main/:mood', {
         templateUrl: 'partials/main',
         controller: 'MainCtrl',
         authenticate: true
