@@ -14,6 +14,18 @@ angular.module('vibeApp')
 		$scope.currentSong;
 		$scope.widget = SC.Widget(iframeElement);
 
+		// log in prompt required
+
+		// choose a mood - page jump
+		// 		- store cookie
+		// login prompt?
+		// next page - request playlist based on cookie
+		// $scope.getMe
+		// do I have a playlist for this mood?
+		// if not, generate - search based on genre
+		// else, return stored data
+
+
 		$scope.getMe = function(){
 			$http({method: 'GET', url: '/api/users/me'}).
 			    success(function(data, status, headers, config) {
