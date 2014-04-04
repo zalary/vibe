@@ -3,7 +3,7 @@
 // var users  = require('./controllers/users');
 
 angular.module('vibeApp')
-  .controller('MoodCtrl', function ($scope, $location, $http) {
+  .controller('MoodCtrl', function ($scope, $location, $http, User) {
 
     $scope.select = "form";
 
@@ -16,6 +16,8 @@ angular.module('vibeApp')
       { type: "party", icon: "<:D" },
       { type: "sad", icon: ":(" }
     ];
+
+    $scope.me = User.id;
 
     $scope.setMood = function (mood) {
       $scope.userMood = mood;
