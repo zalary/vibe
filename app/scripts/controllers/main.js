@@ -30,7 +30,7 @@ angular.module('vibeApp')
 		$scope.addTracks = function(){
 			SC.get('/tracks', { q: genres[0] }, function(tracks) {
 			    for(var i = 0; i < (10/genres.length); i++){
-					queue.push({title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url, skip: false, liked: false});
+					queue.push({title: tracks[i].title, artist: tracks[i].user.username, url: tracks[i].permalink_url, skip: false, liked: false, playcount: 0});
 				}
 			});
 		};
@@ -41,6 +41,20 @@ angular.module('vibeApp')
 			var currentSongIndex = queue.indexOf(atrack);
 			queue[currentSongIndex].playcount++;
 		};
+
+		$scope.cleanUp = function(){
+			console.log(queue.length);
+			var i = 0;
+			if( queue.length > 50){
+				while( i < queue.length ){
+					if( queue[i].liked === false && queue[i].playcount === 0 ){
+						queue.splice(i, 1);
+					}
+					i++;
+				}
+			}
+			console.log(queue.length);
+		},
 
 		$scope.like = function(){
 
@@ -69,7 +83,6 @@ angular.module('vibeApp')
 					}
 				}
 				$scope.widget.seekTo(endTime);
-				$scope.widget.play();
 			});
 		};
 
