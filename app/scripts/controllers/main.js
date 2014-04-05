@@ -66,6 +66,11 @@ angular.module('vibeApp')
 		};
 
 		$scope.togglePlayer = function(){
+			if ($scope.playButton === "glyphicon glyphicon-play") {
+				$scope.playButton = "glyphicon glyphicon-pause";
+			} else {
+				$scope.playButton = "glyphicon glyphicon-play";
+			}
 			$scope.widget.toggle();
 		};
 
@@ -85,5 +90,7 @@ angular.module('vibeApp')
 			$scope.widget.load(atrack.url, {auto_play: true});
 			queue[currentSongIndex].playcount++;
 		});
+
+		$scope.playButton = "glyphicon glyphicon-play";
 
   });

@@ -22,7 +22,9 @@
       <button type="button" class="btn btn-primary" ng-click="addTracks()">add tracks to queue</button>
       <button type="button" class="btn btn-primary" ng-click="cleanUp()">clean up playlist</button>
       <button type="button" class="btn btn-primary" ng-click="loadPlayer()">load player</button>
-      <button type="button" class="btn btn-primary" ng-click="togglePlayer()">play or pause</button>
+      <button type="button" class="btn btn-primary" ng-click="togglePlayer()">
+        <span class={{playButton}}></span>
+      </button>
       <button type="button" class="btn btn-primary" ng-click="pausePlayer()">pause</button>
       <button type="button" class="btn btn-primary" ng-click="skip()">skip</button>
       <button type="button" class="btn btn-primary" ng-click="like()">like</button>
