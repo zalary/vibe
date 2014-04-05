@@ -5,7 +5,7 @@
     <h3>What mood are you in? {{me}}</h3>
     <div class="small-7 small-centered columns">
       <ul class="mood-list">
-        <li ng-repeat="mood in moods"><button ng-click="setMood(mood.type)">{{mood.icon}}</button></li>
+        <li ng-repeat="mood in moods"><button type="button" class="btn btn-default" ng-click="setMood(mood.type)">{{mood.icon}}</button></li>
       </ul>
     </div>
   </div>
@@ -13,9 +13,9 @@
     <h3>What genre do you like to listen to when feeling {{userMood}}?</h3>
     <form ng-submit="setPlayer(userMood, userGenre)">
       <input ng-model="userGenre" autofocus>
-      <button ng-show="userGenre">Feelin' {{userMood}}</button>
+      <button type="button" class="btn btn-default" ng-show="userGenre">Feelin' {{userMood}}</button>
     </form>
-    <button ng-click="chooseMood()">Back</button>
+    <button type="button" class="btn btn-default" ng-click="chooseMood()">Back</button>
   </div>
 </div>
 

@@ -1,9 +1,10 @@
 <div ng-include="'partials/navbar'"></div>
 
-<div class="jumbotron">
-  <h1>Hello, <span ng-show="currentUser">{{ currentUser.name }}</span>.</h1>
+<div class="container-fluid">
+  <div class="row">
+    <h1>Hello, <span ng-show="currentUser">{{ currentUser.name }}</span>.</h1>
+  </div>
 </div>
-
 
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-8">
@@ -14,18 +15,20 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12 col-sm-8 col-md-10">
-    <button class="music_option" ng-click="getMe()">get me</button>
-    <button class="music_option" ng-click="addTracks()">add tracks to queue</button>
-    <button class="music_option" ng-click="cleanUp()">clean up playlist</button>
-    <button class="music_option" ng-click="loadPlayer()">load player</button>
-    <button class="music_option" ng-click="togglePlayer()">play or pause</button>
-    <button class="music_option" ng-click="pausePlayer()">pause</button>
-    <button class="music_option" ng-click="skip()">skip</button>
-    <button class="music_option" ng-click="like()">like</button>
-    <button class="music_option" ng-click="playPlayer()">play</button>
-    <button class="music_option" ng-click="savePlaylist()">save to db</button>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-10">
+      <button type="button" class="btn btn-default" ng-click="getMe()">get me</button>
+      <button type="button" class="btn btn-default" ng-click="addTracks()">add tracks to queue</button>
+      <button type="button" class="btn btn-default" ng-click="cleanUp()">clean up playlist</button>
+      <button type="button" class="btn btn-default" ng-click="loadPlayer()">load player</button>
+      <button type="button" class="btn btn-default" ng-click="togglePlayer()">play or pause</button>
+      <button type="button" class="btn btn-default" ng-click="pausePlayer()">pause</button>
+      <button type="button" class="btn btn-default" ng-click="skip()">skip</button>
+      <button type="button" class="btn btn-default" ng-click="like()">like</button>
+      <button type="button" class="btn btn-default" ng-click="playPlayer()">play</button>
+      <button type="button" class="btn btn-default" ng-click="savePlaylist()">save to db</button>
+    </div>
   </div>
 </div>
 
