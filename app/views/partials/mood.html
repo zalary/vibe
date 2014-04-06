@@ -1,33 +1,44 @@
 <div ng-switch="select">
 
   <div ng-switch-when="form">
-    <div class="modal-header">
-      <h3>What mood are you in {{currentUser.name}}?</h3>
-    </div>
-    <div class="modal-body mood-form">
-        <ul class="mood-list">
-          <li ng-repeat="mood in moods"><button type="button" class="btn btn-primary btn-lg" ng-click="setMood(mood.type)">{{mood.icon}}</button></li>
-        </ul>
-    </div>
-    <div class="modal-footer">
-      <small>♥ vibe </small>
+    <div class="mood-container">
+      <div class="modal-header">
+        <h3>{{currentUser.name}}, what's your mood?</h3>
+      </div>
+      <div class="modal-body mood-form">
+          <ul class="mood-list">
+            <li ng-repeat="mood in moods"><button type="button" class="btn btn-primary btn-lg" ng-click="setMood(mood.type)"><p>{{mood.icon}}</p></button></li>
+          </ul>
+      </div>
+      <div class="modal-footer">
+        <small>♥ vibe</small>
+      </div>
     </div>
   </div>
 
   <div ng-switch-when="genre">
-    <div class="modal-header">
-      <h3>What genre do you like to listen to when feeling {{userMood}}?</h3>
-    </div>
-    <div class="modal-body">
-      <form name="selectMood" ng-submit="setPlayer(userMood, userGenre)">
-        <input placeholder="genre me" ng-model="userGenre" autofocus>
-      </form>
-    </div>
-    <div class="modal-footer">
-        <button name="selectMood" type="button" class="btn btn-primary" ng-show="userGenre" ng-click="setPlayer(userMood, userGenre)">Feelin' {{userMood}}</button>
-      <button type="button" class="btn btn-alert" ng-click="chooseMood()">Back</button>
+    <div class="mood-container">
+      <div class="modal-header">
+        <h3>What genre do you listen to when feeling {{userMood}}?</h3>
+      </div>
+      <div class="modal-body">
+        <form name="selectMood" ng-submit="setPlayer(userMood, userGenre)">
+          <div class="form-group">
+            <input placeholder="genre me" class="form-control" ng-model="userGenre" autofocus required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg backButton" ng-click="chooseMood()">
+          <span class="glyphicon glyphicon-step-backward"></span>
+        </button>
+          <button name="selectMood" type="button" class="btn btn-primary btn-lg" ng-show="userGenre" ng-click="setPlayer(userMood, userGenre)">
+            <span class="glyphicon glyphicon-play"></span>
+          </button>
+      </div>
     </div>
   </div>
+
 </div>
 
 

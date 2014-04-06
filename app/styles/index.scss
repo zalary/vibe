@@ -1,29 +1,42 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 body {
-  // background-color: rgb(14, 105, 125);
   margin: 0 auto;
 }
 
-.mood-form {
-  box-sizing: border-box;
-  margin: 0 auto;
-  // max-width: 48rem;
-  // width: 90%;
-  // text-align: center;
-  height: 25%;
-  padding-top: 5rem;
-}
-
-
-.mood-list {
-  li {
+.mood-container {
+  h3 {
+    text-align: center;
+  }
+  .modal-body {
+    // background-color: gray;
+  }
+  .mood-form {
+    box-sizing: border-box;
+    margin: 0 auto;
+    // max-width: 48rem;
+    // width: 90%;
+    // text-align: center;
+    height: 25%;
+    padding-top: 5rem;
+      .mood-list {
+        li {
+          float: left;
+          margin-left: 10px;
+          p {
+            font-size: 4rem;
+          }
+        }
+        button {
+          height: 10rem !important;
+          width: 10rem !important;
+          border-radius: 100%;
+        }
+      }
+  }
+  .backButton {
     float: left;
-    margin-left: 10px;
-  }
-  button {
-    height: 10rem !important;
-    width: 10rem !important;
-    border-radius: 1rem;
   }
 }
+
+
