@@ -5,17 +5,16 @@ body {
   margin: 0 auto;
 }
 
-
 .mood-form {
   box-sizing: border-box;
   margin: 0 auto;
-  max-width: 48rem;
-  width: 90%;
-  text-align: center;
-  border: 1px solid black;
-  height: 50%;
+  // max-width: 48rem;
+  // width: 90%;
+  // text-align: center;
+  height: 25%;
   padding-top: 5rem;
 }
+
 
 .mood-list {
   li {
@@ -23,8 +22,8 @@ body {
     margin-left: 10px;
   }
   button {
-    height: 3rem ;
-    width: 5rem ;
+    height: 10rem !important;
+    width: 10rem !important;
     border-radius: 1rem;
   }
 }

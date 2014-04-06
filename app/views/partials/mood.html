@@ -1,23 +1,33 @@
-<div ng-include="'partials/navbar'"></div>
+<div ng-switch="select">
 
-<div ng-switch="select" class="row mood-form">
   <div ng-switch-when="form">
-    <h3>What mood are you in? {{me}}</h3>
-    <div class="small-7 small-centered columns">
-      <ul class="mood-list">
-        <li ng-repeat="mood in moods"><button type="button" class="btn btn-primary" ng-click="setMood(mood.type)">{{mood.icon}}</button></li>
-      </ul>
+    <div class="modal-header">
+      <h3>What mood are you in {{currentUser.name}}?</h3>
+    </div>
+    <div class="modal-body mood-form">
+        <ul class="mood-list">
+          <li ng-repeat="mood in moods"><button type="button" class="btn btn-primary btn-lg" ng-click="setMood(mood.type)">{{mood.icon}}</button></li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+      <small>♥ vibe </small>
     </div>
   </div>
+
   <div ng-switch-when="genre">
-    <h3>What genre do you like to listen to when feeling {{userMood}}?</h3>
-    <form ng-submit="setPlayer(userMood, userGenre)">
-      <input ng-model="userGenre" autofocus>
-      <button type="button" class="btn btn-primary" ng-show="userGenre">Feelin' {{userMood}}</button>
-    </form>
-    <button type="button" class="btn btn-primary" ng-click="chooseMood()">Back</button>
+    <div class="modal-header">
+      <h3>What genre do you like to listen to when feeling {{userMood}}?</h3>
+    </div>
+    <div class="modal-body">
+      <form name="selectMood" ng-submit="setPlayer(userMood, userGenre)">
+        <input placeholder="genre me" ng-model="userGenre" autofocus>
+      </form>
+    </div>
+    <div class="modal-footer">
+        <button name="selectMood" type="button" class="btn btn-primary" ng-show="userGenre" ng-click="setPlayer(userMood, userGenre)">Feelin' {{userMood}}</button>
+      <button type="button" class="btn btn-alert" ng-click="chooseMood()">Back</button>
+    </div>
   </div>
 </div>
 
-{{userMood}}
 

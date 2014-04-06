@@ -27,17 +27,14 @@ angular.module('vibeApp', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
-      .when('/song', {
-        templateUrl: 'partials/song',
-        controller: 'SongCtrl'
-      })
-      .when('/song_form', {
-        templateUrl: 'partials/song_form.html',
-        controller: 'SongFormCtrl'
-      })
-      .when('/', {
+      .when('/mood', {
         templateUrl: 'partials/mood.html',
         controller: 'MoodCtrl',
+        authenticate: true
+      })
+      .when('/', {
+        templateUrl: 'partials/moodselect.html',
+        controller: 'MoodselectCtrl',
         authenticate: true
       })
       .otherwise({

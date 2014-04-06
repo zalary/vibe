@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('vibeApp')
-	.controller('MainCtrl', function ($scope, $routeParams, User, $http) {
+	.controller('MainCtrl', function ($scope, $routeParams, User, $http, $modal) {
 
 		SC.initialize({
 			client_id: '5b99452b5af12d3c60b5c44999140f09',
@@ -92,5 +92,6 @@ angular.module('vibeApp')
 		});
 
 		$scope.playButton = "glyphicon glyphicon-play";
+
 
   });

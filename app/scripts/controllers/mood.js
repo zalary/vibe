@@ -3,7 +3,7 @@
 // var users  = require('./controllers/users');
 
 angular.module('vibeApp')
-  .controller('MoodCtrl', function ($scope, $location, $http, User) {
+  .controller('MoodCtrl', function ($scope, $location, $http, $log, User, $modalInstance) {
 
     $scope.select = "form";
 
@@ -28,6 +28,7 @@ angular.module('vibeApp')
           }
           else {
             $location.path('/main/' + mood);
+            $modalInstance.close();
           }
         })
         .error(function (data) {
@@ -40,6 +41,7 @@ angular.module('vibeApp')
     };
 
     $scope.setPlayer = function (mood, genre) {
+      $modalInstance.close(genre);
       $http.post('/moods/genre', { genre: genre, mood: mood })
         .success(function (data) {
           $location.path('/main/' + mood);
@@ -48,5 +50,6 @@ angular.module('vibeApp')
           window.alert("Sorry, your vibe can't be processed at this time");
         })
     };
+
 
   });
