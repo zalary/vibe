@@ -2,7 +2,9 @@
 
 angular.module('vibeApp')
   .controller('LoginCtrl', function ($scope, Auth, $location) {
-    $scope.user = {};
+    
+    //remove for production
+    $scope.user = {email: "test@test.com", password: "test"};
     $scope.errors = {};
 
     $scope.login = function(form) {
