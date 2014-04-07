@@ -2,11 +2,26 @@
 
 body {
   margin: 0 auto;
+  /*background-color: black*/
+  /*background: url("/images/gradientbar.png");*/
+  background: #66c9ff; /* Old browsers */
+background: -moz-linear-gradient(top, #66c9ff 0%, #c1ffaf 33%, #f9ff8c 66%, #eed1ff 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#66c9ff), color-stop(33%,#c1ffaf), color-stop(66%,#f9ff8c), color-stop(100%,#eed1ff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #66c9ff 0%,#c1ffaf 33%,#f9ff8c 66%,#eed1ff 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #66c9ff 0%,#c1ffaf 33%,#f9ff8c 66%,#eed1ff 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #66c9ff 0%,#c1ffaf 33%,#f9ff8c 66%,#eed1ff 100%); /* IE10+ */
+background: linear-gradient(to bottom, #66c9ff 0%,#c1ffaf 33%,#f9ff8c 66%,#eed1ff 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66c9ff', endColorstr='#eed1ff',GradientType=0 ); /* IE6-9 */
 }
 
 .mood-container {
   h3 {
     text-align: center;
+/*    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;*/
   }
   .modal-body {
     // background-color: gray;
